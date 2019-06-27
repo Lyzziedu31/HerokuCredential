@@ -11,6 +11,7 @@
     
 </form>
     <button class="btn btn-primary" onclick="Login()">Submit</button>
+    <button class="btn btn-secondary" onclick="Create()">Create account</button>
 <hr/>
 
 <div id="PartialLoginResult">
@@ -25,6 +26,30 @@
         console.log("password: " + password);
         $.ajax({
           url: "/Home/Login",
+          type: 'POST',
+          data: {
+              "email": email,
+              "password": password
+            },
+          
+          success: function (result) {
+              $('#PartialLoginResult').html(result);
+              console.log(result);
+            
+          },
+          error: function (error) {
+              console.log(error);
+          }
+        });
+        }       
+
+    function Create() {
+        var email = document.getElementById("emaildata").value;
+        console.log("email: " + email);
+        var password = document.getElementById("passworddata").value;
+        console.log("password: " + password);
+        $.ajax({
+          url: "/Home/Create",
           type: 'POST',
           data: {
               "email": email,
